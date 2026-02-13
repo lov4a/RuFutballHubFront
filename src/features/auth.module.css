@@ -1,0 +1,9 @@
+.inputBlock{
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+}
+
+.inputBlock input{
+    margin-bottom: 3px;
+}

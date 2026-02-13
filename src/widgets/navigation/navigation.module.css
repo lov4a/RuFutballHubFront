@@ -1,0 +1,92 @@
+a{
+    text-decoration: none;
+    color: white;
+}
+
+.header{
+    position: relative;
+    z-index: 100;
+}
+
+/* ===== TOP BAR ===== */
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 36px;
+  padding: 0 16px;
+  background-image: linear-gradient(to right top, #00ac1e, #00b35d, #00b88b, #00bbad, #00bcc4);
+  color: #fff;
+  font-size: 14px;
+  padding-left: 280px;
+  padding-right: 280px;
+  z-index: 100;
+}
+
+.topLeft,
+.topRight {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.signIn {
+  background: transparent;
+  color: white;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.join {
+  background: #7b3fe4;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-decoration: none;
+}
+
+/* ===== MAIN NAV ===== */
+.mainNav {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding: 0 16px;
+  background: black;
+  color: white;
+  text-decoration: none;
+  padding-left: 280px;
+  padding-right: 280px;
+  z-index: 100;
+}
+
+
+.logo {
+  font-weight: bold;
+  margin-right: 24px;
+}
+
+.nav {
+  display: flex;
+  gap: 16px;
+}
+
+.burger {
+  display: none;
+  margin-right: 12px;
+  font-size: 22px;
+  background: none;
+  border: none;
+  color: white;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+
+  .burger {
+    display: block;
+  }
+}

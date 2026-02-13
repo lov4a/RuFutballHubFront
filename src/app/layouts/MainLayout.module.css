@@ -1,0 +1,30 @@
+.page {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr) 280px;
+  gap: 24px;
+}
+
+/* Центр */
+.content {
+  min-width: 0;
+}
+
+/* Боковые зоны */
+.left,
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Tablet + mobile */
+@media (max-width: 1200px) {
+  .page {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .left,
+  .right {
+    display: none;
+  }
+}
