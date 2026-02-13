@@ -12,6 +12,8 @@ import { AuthNavigationEffect } from '../providers/AuthNavigationEffect'
 import { ManualUnderstatMatchingPage } from '../../pages/admin/manualPlayerMatching'
 import { ManualFotMobMatchingPage } from '../../pages/admin/manualPlayerMatching'
 
+import { NewsEditorPage } from '../../pages/newsEditor'
+
 
 export function AppRouter() {
   return (
@@ -32,6 +34,10 @@ export function AppRouter() {
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/admin/manual-player-matching/understat" element={<ManualUnderstatMatchingPage  />} />
             <Route path="/admin/manual-player-matching/fotmob" element={<ManualFotMobMatchingPage />} />
+          </Route>
+
+          <Route element={<RequireAuth roles={[UserRole.Admin, UserRole.Editor]} />}>
+              <Route path="/create-news" element={<NewsEditorPage />} />
           </Route>
       </Route>
     </Routes>

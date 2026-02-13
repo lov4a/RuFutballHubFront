@@ -18,3 +18,16 @@ body {
   background-color: #fff;
   color: #000;
 }
+
+.ProseMirror {
+  min-height: 400px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+}
+
+.ProseMirror:focus {
+  border-color: #4f46e5;
+}
+
