@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 
 import { Header } from '../../widgets/navigation'
-import { LeftAdRail, RightAdRail } from '../../widgets/ads'
+import { LeftPromoRail, RightPromoRail } from '../../widgets/promo'
 
 import { ErrorNotification } from '../notifications/ErrorNotification'
 import { useGlobalError } from '../providers/ErrorProvider'
@@ -22,7 +22,7 @@ export function MainLayout() {
       
       <div className={styles.page}>
         <aside className={styles.left}>
-          <LeftAdRail />
+          <LeftPromoRail />
         </aside>
 
         <main className={styles.content}>
@@ -30,7 +30,7 @@ export function MainLayout() {
         </main>
 
         <aside className={styles.right}>
-          <RightAdRail />
+          <RightPromoRail />
         </aside>
       </div>
     </>

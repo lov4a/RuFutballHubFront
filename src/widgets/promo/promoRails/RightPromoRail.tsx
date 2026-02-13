@@ -1,6 +1,6 @@
-import styles from '../ads.module.css'
+import styles from '../promo.module.css'
 
-export function RightAdRail() {
+export function RightPromoRail() {
   return (
     <div className={styles.ad}>
       Right Ad
