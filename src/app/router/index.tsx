@@ -13,6 +13,7 @@ import { ManualUnderstatMatchingPage } from '../../pages/admin/manualPlayerMatch
 import { ManualFotMobMatchingPage } from '../../pages/admin/manualPlayerMatching'
 
 import { NewsEditorPage } from '../../pages/newsEditor'
+import PredictedPointsPage from "../../pages/predictedPoints";
 
 
 export function AppRouter() {
@@ -25,6 +26,8 @@ export function AppRouter() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+
+        <Route path="/predicted-points" element={<PredictedPointsPage />} />
 
         <Route element={<RequireAuth />}>
           <Route path="/profile" element={<ProfilePage />} />

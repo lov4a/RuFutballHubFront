@@ -8,11 +8,16 @@ import './shared/api/interceptors'
 
 
 import './shared/styles/global.css'
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <BrowserRouter>
-    <AppProviders>
-      <AppRouter />
-    </AppProviders>
-  </BrowserRouter>,
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <AppProviders>
+          <AppRouter />
+        </AppProviders>
+      </BrowserRouter>
+    </QueryClientProvider>,
 )
