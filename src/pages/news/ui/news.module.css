@@ -1,0 +1,111 @@
+.page {
+  background: #f5f6f8;
+  min-height: 100vh;
+}
+
+.hero img {
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  display: block;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: white;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.meta {
+  display: flex;
+  gap: 20px;
+  color: #777;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.summary {
+  font-size: 20px;
+  font-style: italic;
+  margin-bottom: 30px;
+  color: #444;
+}
+
+.content {
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.content img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.content h2 {
+  margin-top: 40px;
+  font-size: 26px;
+}
+
+.adminImages {
+  margin-top: 40px;
+  padding: 20px;
+  background: #fafafa;
+  border: 1px solid #ddd;
+}
+
+.adminImages img {
+  max-width: 400px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.adminPanel {
+  margin-top: 50px;
+  padding: 20px;
+  border: 2px solid #eee;
+  background: #fafafa;
+}
+
+.adminPanel textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+}
+
+.button {
+  padding: 10px 16px;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  color: white;
+}
+
+.success {
+  background: #2e7d32;
+}
+
+.danger {
+  background: #c62828;
+}
+
+.rejection {
+  margin-top: 30px;
+  padding: 15px;
+  background: #ffeaea;
+  border: 1px solid #ffbdbd;
+  color: #a00000;
+}
+
+.loader {
+  text-align: center;
+  padding: 60px;
+}
