@@ -1,30 +1,89 @@
 .page {
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr) 280px;
   gap: 24px;
+
+  /* 4 колонки по умолчанию */
+  grid-template-columns:
+    240px              /* левый ad */
+    minmax(0, 1fr)     /* основной */
+    360px              /* виджеты */
+    240px;             /* правый ad */
 }
 
-/* Центр */
-.content {
+/* ============================= */
+/* ЗОНЫ */
+/* ============================= */
+
+.main {
   min-width: 0;
 }
 
-/* Боковые зоны */
-.left,
-.right {
+.widgets {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.leftAd,
+.rightAd {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* Tablet + mobile */
-@media (max-width: 1200px) {
+/* ============================= */
+/* ЕСЛИ НЕТ ВИДЖЕТОВ */
+/* ============================= */
+
+.noWidgets {
+  grid-template-columns:
+    240px
+    minmax(0, 1fr)
+    240px;
+}
+
+/* ============================= */
+/* ЕСЛИ НЕТ РЕКЛАМЫ */
+/* ============================= */
+
+.noAds {
+  grid-template-columns:
+    minmax(0, 1fr)
+    360px;
+}
+
+/* ЕСЛИ НЕТ НИ ВИДЖЕТОВ, НИ РЕКЛАМЫ */
+
+.noAds.noWidgets {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* ============================= */
+/* АДАПТИВ */
+/* ============================= */
+
+/* Убираем рекламу на средних экранах */
+@media (max-width: 1400px) {
   .page {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns:
+      minmax(0, 1fr)
+      340px;
   }
 
-  .left,
-  .right {
+  .leftAd,
+  .rightAd {
     display: none;
+  }
+}
+
+/* Всё в одну колонку */
+@media (max-width: 900px) {
+  .page {
+    grid-template-columns: 1fr;
+  }
+
+  .widgets {
+    order: 2;
   }
 }

@@ -1,0 +1,1 @@
+export { PredictedLineupsPage } from './ui/PredictedLineupsPage'

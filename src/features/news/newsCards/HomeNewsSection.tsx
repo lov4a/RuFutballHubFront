@@ -81,6 +81,7 @@ function NewsSmallCard({ news }: { news: News }) {
 
       <div className={styles.cardContent}>
         <h3>{news.title}</h3>
+        <p>{news.summary}</p>
       </div>
     </Link>
   )

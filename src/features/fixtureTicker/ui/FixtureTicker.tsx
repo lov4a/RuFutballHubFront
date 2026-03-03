@@ -6,96 +6,80 @@ import styles from './fixtureTicker.module.css'
 
 type Props = {
   seasonId: string
-  initialFrom?: number
-  initialTo?: number
   fullWidth?: boolean
 }
 
 export function FixtureTicker({
   seasonId,
-  initialFrom,
-  initialTo,
   fullWidth = false,
 }: Props) {
   const [data, setData] = useState<TeamTicker[]>([])
   const [currentTour, setCurrentTour] = useState<number | null>(null)
-  const [fromTour, setFromTour] = useState<number>(1)
-  const [toTour, setToTour] = useState<number>(5)
+  const [visibleTour, setVisibleTour] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
 
   const scrollRef = useRef<HTMLDivElement>(null)
 
-  // 🔥 Инициализация
+  // 🔥 Загрузка текущего тура и всех данных (1 раз)
   useEffect(() => {
     async function init() {
-      const tour = await getCurrentTour(seasonId)
-      setCurrentTour(tour)
-
-      if (fullWidth) {
-        // Большой календарь — весь сезон
-        setFromTour(1)
-        setToTour(30)
-      } else if (initialFrom && initialTo) {
-        // Если передали явно диапазон
-        setFromTour(initialFrom)
-        setToTour(initialTo)
-      } else {
-        // Мини календарь — от текущего тура
-        setFromTour(tour)
-        setToTour(tour + 4)
-      }
-    }
-
-    init()
-  }, [seasonId, fullWidth, initialFrom, initialTo])
-
-  // 🔥 Загрузка данных
-  useEffect(() => {
-    if (!currentTour) return
-
-    async function load() {
       try {
         setLoading(true)
+
+        const tour = await getCurrentTour(seasonId)
+        setCurrentTour(tour)
+        setVisibleTour(tour)
+
         const result = await getFixtureTicker(
           seasonId,
-          fromTour,
-          toTour
+          1,
+          30
         )
+
         setData(result)
       } finally {
         setLoading(false)
       }
     }
 
-    load()
-  }, [seasonId, fromTour, toTour, currentTour])
+    init()
+  }, [seasonId])
 
-  // 🔥 Автоскролл для большого календаря
-  useEffect(() => {
-    if (!fullWidth || !currentTour || !scrollRef.current) return
+  // 🔥 Скролл к туру
+  const scrollToTour = (tour: number) => {
+    if (!scrollRef.current) return
 
-    const cellWidth = 60
-    const offset = (currentTour - 1) * cellWidth
+    const cellWidth = 60 // соответствует ширине ячейки
+    const offset = (tour - 1) * cellWidth
 
     scrollRef.current.scrollTo({
-      left: offset - 200,
+      left: offset - 120,
       behavior: 'smooth',
     })
-  }, [data, currentTour, fullWidth])
+  }
+
+  // 🔥 Автоскролл при первой загрузке
+  useEffect(() => {
+    if (!currentTour) return
+    scrollToTour(currentTour)
+  }, [data, currentTour])
 
   const difficultyClass = (level: number) =>
     styles[`difficulty${level}`]
 
+  // 🔥 Кнопки мини-виджета (только скроллят)
   const handlePrev = () => {
-    if (fromTour <= 1) return
-    setFromTour(prev => prev - 1)
-    setToTour(prev => prev - 1)
+    if (!visibleTour || visibleTour <= 1) return
+    const newTour = visibleTour - 1
+    setVisibleTour(newTour)
+    scrollToTour(newTour)
   }
 
   const handleNext = () => {
-    if (toTour >= 30) return
-    setFromTour(prev => prev + 1)
-    setToTour(prev => prev + 1)
+    if (!visibleTour || visibleTour >= 30) return
+    const newTour = visibleTour + 1
+    setVisibleTour(newTour)
+    scrollToTour(newTour)
   }
 
   if (loading) return <div>Loading...</div>
@@ -106,66 +90,90 @@ export function FixtureTicker({
         fullWidth ? styles.fullWidth : ''
       }`}
     >
-      <div className={styles.scrollContainer} ref={scrollRef}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th className={styles.teamHeader}>КОМ</th>
+      {!fullWidth && <h3>RFH Календарь</h3>}
 
-              {Array.from(
-                { length: toTour - fromTour + 1 },
-                (_, i) => fromTour + i
-              ).map(tour => (
-                <th
-                  key={tour}
-                  className={`${styles.tourHeader} ${
-                    tour === currentTour
-                      ? styles.currentTour
-                      : ''
-                  }`}
-                >
-                  {tour}
-                </th>
+      <div className={styles.tableWrapper}>
+        {/* Левая фиксированная колонка */}
+        <div className={styles.leftColumn}>
+          <table>
+            <thead>
+              <tr>
+                <th className={styles.teamHeader}>КОМ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map(team => (
+                <tr key={team.teamSeasonId}>
+                  <td className={styles.teamCell}>
+                    {team.teamName}
+                  </td>
+                </tr>
               ))}
-            </tr>
-          </thead>
+            </tbody>
+          </table>
+        </div>
 
-          <tbody>
-            {data.map(team => (
-              <tr key={team.teamSeasonId}>
-                <td className={styles.teamCell}>
-                  {team.teamName}
-                </td>
-
-                {team.fixtures.map(f => (
-                  <td
-                    key={f.tourNumber}
-                    className={`${styles.fixture}
-                      ${difficultyClass(
-                        f.difficultyLevel
-                      )}
-                      ${
-                        f.tourNumber === currentTour
+        {/* Правая скроллируемая часть */}
+        <div
+          className={styles.rightScroll}
+          ref={scrollRef}
+        >
+          <table>
+            <thead>
+              <tr>
+                {Array.from({ length: 30 }, (_, i) => i + 1).map(
+                  tour => (
+                    <th
+                      key={tour}
+                      className={
+                        tour === currentTour
                           ? styles.currentTour
                           : ''
                       }
-                    `}
-                    title={f.isHome ? 'Д' : 'Г'}
-                  >
-                    {f.opponentShortName}
-                  </td>
-                ))}
+                    >
+                      {tour}
+                    </th>
+                  )
+                )}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {data.map(team => (
+                <tr key={team.teamSeasonId}>
+                  {team.fixtures.map(f => (
+                    <td
+                      key={f.tourNumber}
+                      className={`${styles.fixture}
+                        ${difficultyClass(
+                          f.difficultyLevel
+                        )}
+                        ${
+                          f.tourNumber === currentTour
+                            ? styles.currentTour
+                            : ''
+                        }
+                      `}
+                    >
+                      {f.opponentShortName}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      {/* 🔥 Кнопки только для компактного режима */}
+      {/* Кнопки только в компактном режиме */}
       {!fullWidth && (
         <div className={styles.controls}>
-          <button onClick={handlePrev}>&#60;</button>
-          <button onClick={handleNext}>&#62;</button>
+          <button onClick={handlePrev}>
+            &#60;
+          </button>
+          <button onClick={handleNext}>
+            &#62;
+          </button>
         </div>
       )}
     </div>
