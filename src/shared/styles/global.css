@@ -27,7 +27,65 @@ body {
   outline: none;
 }
 
+
+.editor-wrapper {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.editor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+  background: #fafafa;
+}
+
+.toolbar-group {
+  display: flex;
+  gap: 6px;
+  padding-right: 10px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.toolbar-group:last-child {
+  border-right: none;
+}
+
+.toolbar-btn {
+  min-width: 36px;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.15s ease;
+}
+
+.toolbar-btn:hover {
+  background: #f3f4f6;
+  border-color: #c7c7c7;
+}
+
+.toolbar-btn.active {
+  background: #111827;
+  color: white;
+  border-color: #111827;
+}
+
+.editor-content {
+  padding: 16px;
+  min-height: 350px;
+}
+
 .ProseMirror:focus {
-  border-color: #4f46e5;
+  outline: none;
 }
 

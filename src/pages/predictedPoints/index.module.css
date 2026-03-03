@@ -1,0 +1,73 @@
+.tableContainer {
+    width: max-content;
+}
+
+
+.tableWrapper {
+    overflow-x: auto;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    max-height: calc(100vh - 250px);
+}
+
+.stickyTable {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: max-content;
+    font-size: 14px;
+}
+
+.stickyTable th,
+.stickyTable td {
+    padding: 10px 16px;
+    white-space: nowrap;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.stickyTable tbody tr:nth-child(even) td {
+    background: #fafafa;
+}
+
+.stickyTable tbody tr:hover td {
+    background: #f1f1f1;
+}
+
+.stickyTable thead th {
+    background: #f4f6f8;
+    font-weight: 600;
+    border-bottom: 2px solid #bbb;
+}
+
+.stickyCol {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    background: #fff;
+    border-right: 2px solid #bbb;
+    width: 55px;
+}
+
+.stickyTable thead .stickyCol {
+    z-index: 4;
+    background: #f4f6f8;
+}
+
+.colId {
+   width: 60px;
+}
+
+.colName {
+    width: 220px;
+}
+
+.colTour {
+    width: 70px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 15px 0;
+}
