@@ -4,14 +4,15 @@ import { RequireAuth } from './RequireAuth'
 
 import { HomePage } from '../../pages/homePage/HomePage'
 import { LoginPage } from '../../pages/login'
-import { RegisterPage } from '../../pages/register'
-import { ProfilePage } from '../../pages/profile'
+// import { RegisterPage } from '../../pages/register'
+// import { ProfilePage } from '../../pages/profile'
 import { AdminPage } from '../../pages/admin'
 import { UserRole } from '../../shared/auth/roles'
 import { AuthNavigationEffect } from '../providers/AuthNavigationEffect'
 import { ManualUnderstatMatchingPage } from '../../pages/admin/manualPlayerMatching'
 import { ManualFotMobMatchingPage } from '../../pages/admin/manualPlayerMatching'
 import { PredictedLineupEditPage } from '../../pages/admin/predictedLineupEdit'
+import {CryptoDonatePage} from '../../pages/cryptoDonatePage'
 
 
 import { NewsCreatePage } from '../../pages/news'
@@ -21,6 +22,7 @@ import { NewsListPage } from '../../pages/news'
 
 import {FixturesPage} from '../../pages/fixturesPage/FixturesPage'
 import {PredictedLineupsPage} from '../../pages/predictedLineup'
+import {PrivacyPolicyPage} from '../../pages/privacyPolicy'
 
 
 
@@ -34,11 +36,11 @@ export function AppRouter() {
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        {/* <Route path="/register" element={<RegisterPage />} /> */}
 
-        <Route element={<RequireAuth />}>
+        {/* <Route element={<RequireAuth />}>
           <Route path="/profile" element={<ProfilePage />} />
-        </Route>
+        </Route> */}
         
         <Route element={<RequireAuth roles={[UserRole.Admin]} />}>
             <Route path="/admin" element={<AdminPage />} />
@@ -56,6 +58,8 @@ export function AppRouter() {
           <Route path="/news/:id" element={<NewsDetailsPage />} />
           <Route path="/fixtures-ticker" element={<FixturesPage />} />
           <Route path="/predicted-lineups" element={<PredictedLineupsPage />} />
+          <Route path="/donate/crypto" element={<CryptoDonatePage />} />
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
 
       </Route>
     </Routes>

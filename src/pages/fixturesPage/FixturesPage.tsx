@@ -1,13 +1,14 @@
 import { FixtureTicker } from '../../features/fixtureTicker/ui/FixtureTicker'
 
+const SEASON_ID = import.meta.env.VITE_SEASON_ID as string
 
 export function FixturesPage(){
     return(
         <div>
-            <h2>RFH Календарь</h2>
+            <h2 style={{marginTop:'0'}}>RFH Календарь</h2>
             
             <FixtureTicker
-            seasonId={"598c15d1-e730-4365-8617-9bd9c24e7553"}
+            seasonId={SEASON_ID}
             fullWidth/>
         </div>
 

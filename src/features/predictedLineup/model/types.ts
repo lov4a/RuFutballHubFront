@@ -4,7 +4,7 @@ export type PredictedLineupPlayerDto = {
   position: string
   teamName: string
   price: number
-  status: number
+  status: string
 }
 
 export type PredictedLineupDto = {

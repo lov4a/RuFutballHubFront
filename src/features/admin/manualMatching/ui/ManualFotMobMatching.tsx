@@ -8,12 +8,14 @@ import {
 
 import type { FotMobSeasonPlayerDto } from '../../../../shared/admin/matching/types'
 
+const SEASON_ID = import.meta.env.VITE_SEASON_ID as string
+
 export function ManualFotMobMatching() {
   return (
     <ManualPlayerMatchingBase<FotMobSeasonPlayerDto>
       title="Ручное сопоставление FotMob"
       loadPlayerSeasons={() =>
-        getPlayerSeasonsWithoutFotmob('598c15d1-e730-4365-8617-9bd9c24e7553')
+        getPlayerSeasonsWithoutFotmob(SEASON_ID)
       }
       loadTargets={getFotMobPlayersNotProcessed}
       getTargetId={(f) => f.fotMobPlayerSeasonId}

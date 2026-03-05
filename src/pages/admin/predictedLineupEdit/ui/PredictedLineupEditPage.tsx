@@ -79,7 +79,12 @@ export function PredictedLineupEditPage() {
     if (player.isInLineup) {
       await removePlayer(lineupId, player.playerSeasonId)
     } else {
-      await addPlayer(lineupId, player.playerSeasonId)
+      await addPlayer(
+        lineupId,
+        player.playerSeasonId,
+        player.status ?? 0,
+        player.lineupPosition ?? 0
+      )
     }
 
     setData(prev =>
@@ -89,7 +94,12 @@ export function PredictedLineupEditPage() {
               ...block,
               players: block.players.map(p =>
                 p.playerSeasonId === player.playerSeasonId
-                  ? { ...p, isInLineup: !p.isInLineup }
+                  ? {
+                      ...p,
+                      isInLineup: !p.isInLineup,
+                      status: player.status,
+                      lineupPosition: player.lineupPosition
+                    }
                   : p
               )
             }
@@ -113,6 +123,8 @@ export function PredictedLineupEditPage() {
                 <th>Игрок</th>
                 <th>Позиция</th>
                 <th>Цена</th>
+                <th>Статус</th>
+                <th>Позиция</th>
               </tr>
             </thead>
             <tbody>
@@ -133,6 +145,74 @@ export function PredictedLineupEditPage() {
                   <td>{player.fullName}</td>
                   <td>{player.position}</td>
                   <td>{player.price}</td>
+                  <td>
+                    <select
+                      value={player.status ?? 0}
+                      onChange={e => {
+                        const status = Number(e.target.value)
+
+                        setData(prev =>
+                          prev.map(block =>
+                            block.lineupId === block.lineupId
+                              ? {
+                                  ...block,
+                                  players: block.players.map(p =>
+                                    p.playerSeasonId === player.playerSeasonId
+                                      ? { ...p, status }
+                                      : p
+                                  )
+                                }
+                              : block
+                          )
+                        )
+                      }}
+                    >
+                      <option value={0}>Probable</option>
+                      <option value={1}>Question</option>
+                      <option value={2}>Injured</option>
+                      <option value={3}>Suspended</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      value={player.lineupPosition ?? 0}
+                      onChange={e => {
+                        const position = Number(e.target.value)
+
+                        setData(prev =>
+                          prev.map(block =>
+                            block.lineupId === block.lineupId
+                              ? {
+                                  ...block,
+                                  players: block.players.map(p =>
+                                    p.playerSeasonId === player.playerSeasonId
+                                      ? { ...p, lineupPosition: position }
+                                      : p
+                                  )
+                                }
+                              : block
+                          )
+                        )
+                      }}
+                    >
+                      <option value={0}>ВРТ</option>
+                      <option value={1}>ЗАЩ</option>
+                      <option value={2}>ПЗЩ</option>
+                      <option value={3}>НАП</option>
+                      <option value={4}>ПЗ</option>
+                      <option value={5}>ЦЗ</option>
+                      <option value={6}>ЛЗ</option>
+                      <option value={7}>ЦОП</option>
+                      <option value={8}>ЦП</option>
+                      <option value={9}>ЦАП</option>
+                      <option value={10}>ЛП</option>
+                      <option value={11}>ПП</option>
+                      <option value={12}>ЛФА</option>
+                      <option value={13}>ПФА</option>
+                      <option value={14}>ЦФД</option>
+                      <option value={15}>ФРВ</option>
+                    </select>
+                  </td>
                 </tr>
               ))}
             </tbody>

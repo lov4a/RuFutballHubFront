@@ -8,11 +8,17 @@ type MobileSidebarProps = {
 }
 
 export function MobileSidebar({ open, onClose }: MobileSidebarProps) {
-  if (!open) return null
-
   return (
-    <div className={styles.sidebarOverlay} onClick={onClose}>
-      <aside className={styles.sidebar} onClick={(e) => e.stopPropagation()}>
+    <div
+      className={`${styles.sidebarOverlay} ${
+        open ? styles.open : ''
+      }`}
+      onClick={onClose}
+    >
+      <aside
+        className={styles.sidebar}
+        onClick={(e) => e.stopPropagation()}
+      >
         {NAV_ITEMS.map((item) => (
           <Link key={item.to} to={item.to} onClick={onClose}>
             {item.label}

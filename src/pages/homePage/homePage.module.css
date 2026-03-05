@@ -1,8 +1,21 @@
 .mainContainer{
     display: block;
-    margin-top:20px;
 }
 
 .container{
     margin-bottom: 20px;
+    border: 1px solid lightgray;
+    border-radius: 12px;
+}
+
+
+/* Адаптив */
+
+@media (max-width: 1100px) {
+    .container{
+        border-radius: 0 0 12px 12px;
+    }
+}
+
+@media (max-width: 700px) {
 }

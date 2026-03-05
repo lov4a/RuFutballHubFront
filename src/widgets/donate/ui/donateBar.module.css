@@ -1,0 +1,87 @@
+.donateBar{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height: 70px;
+  padding:8px 16px;
+
+    background: linear-gradient(
+    120deg,
+    #0f0f0f 0%,
+    #0f3d2e 40%,
+    #0f0f0f 70%
+  );
+
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-bottom:1px solid #2a2a2a;
+  border-radius: 12px;
+
+}
+
+.text{
+  font-size:14px;
+  color:#d0d0d0;
+  margin-right: 20px;
+}
+
+.buttons{
+  display:flex;
+  gap:10px;
+}
+
+.donate{
+  padding:6px 12px;
+  background:#ff7a00;
+  border-radius:6px;
+  color:white;
+  font-weight:600;
+}
+
+.crypto{
+  padding:6px 12px;
+  background:#2fbf71;
+  border-radius:6px;
+  color:white;
+  font-weight:600;
+}
+
+.donateBar {
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+
+  background: none;
+  border: none;
+  color: #bbb;
+
+  font-size: 16px;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.close:hover {
+  color: white;
+}
+
+
+@media (max-width: 1400px) {
+
+}
+
+/* Всё в одну колонку */
+@media (max-width: 900px) {
+  .buttons{
+    font-size: 12px;
+  }
+  .close{
+    font-size: 10px;
+    top: 1px;
+    right: 1px;
+  }
+}

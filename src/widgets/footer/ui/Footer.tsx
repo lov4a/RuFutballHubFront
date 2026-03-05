@@ -6,13 +6,15 @@ export function Footer() {
       <div className={styles.container}>
         <div className={styles.left}>
           <h3>RFH</h3>
-          <p>Fantasy портал по РПЛ</p>
+          <p>Портал по Fantasy РПЛ</p>
+          <a href="donate/crypto">Поддержать проект</a>
         </div>
 
         <div className={styles.center}>
+          <a href="expected-points">Ожидаемые очки</a>
           <a href="fixtures-ticker">Календарь</a>
-          <a href="#">Ожидаемые очки</a>
-          <a href="#">Новости</a>
+          <a href="predicted-lineups">Ожидаемые составы</a>
+          <a href="news">Новости</a>
         </div>
 
         <div className={styles.right}>

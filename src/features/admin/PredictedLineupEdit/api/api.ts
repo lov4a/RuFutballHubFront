@@ -32,14 +32,16 @@ export async function getTeamPlayersWithStatus(
 // Добавить игрока
 export async function addPlayer(
   lineupId: string,
-  playerSeasonId: string
+  playerSeasonId: string,
+  status: number,
+  position: number
 ) {
   await api.post(`/predicted-lineups/admin/${lineupId}/players`, {
     playerSeasonId,
-    status: 0
+    status,
+    position
   })
 }
-
 // Удалить игрока
 export async function removePlayer(
   lineupId: string,

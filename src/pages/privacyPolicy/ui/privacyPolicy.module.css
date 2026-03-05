@@ -1,0 +1,38 @@
+.page{
+  display:flex;
+  justify-content:center;
+  padding:0px 20px;
+}
+
+.container{
+  max-width:800px;
+  width:100%;
+}
+
+h1{
+  margin-bottom:20px;
+  margin-top: 0;
+  font-size: 20px;
+}
+
+h2{
+  margin-bottom:10px;
+  font-size: 20px;
+}
+
+p{
+  line-height:1.6;
+}
+
+ul{
+  margin-top:10px;
+  padding-left:20px;
+}
+
+li{
+  margin-bottom:6px;
+}
+
+.intro{
+  margin-bottom:20px;
+}
