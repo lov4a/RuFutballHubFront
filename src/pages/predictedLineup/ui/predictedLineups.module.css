@@ -1,0 +1,44 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+  gap: 24px;
+  padding: 24px;
+}
+
+.card {
+  background: #f4f4f4;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.header {
+  background: #1e5fa3;
+  color: white;
+  padding: 12px;
+  font-weight: bold;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.team {
+  width: 48%;
+}
+
+.teamName {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.players {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.players li {
+  margin-bottom: 4px;
+}

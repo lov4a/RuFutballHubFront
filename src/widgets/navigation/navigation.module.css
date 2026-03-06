@@ -18,8 +18,8 @@ a{
   background-image: linear-gradient(to right top, #00ac1e, #00b35d, #00b88b, #00bbad, #00bcc4);
   color: #fff;
   font-size: 14px;
-  padding-left: 280px;
-  padding-right: 280px;
+  padding-left: 240px;
+  padding-right: 240px;
   z-index: 100;
 }
 
@@ -55,8 +55,8 @@ a{
   background: black;
   color: white;
   text-decoration: none;
-  padding-left: 280px;
-  padding-right: 280px;
+  padding-left: 240px;
+  padding-right: 240px;
   z-index: 100;
 }
 
@@ -88,5 +88,18 @@ a{
 
   .burger {
     display: block;
+  }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 1400px) {
+  .topBar {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .mainNav {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }

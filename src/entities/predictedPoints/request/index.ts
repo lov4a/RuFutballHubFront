@@ -5,7 +5,7 @@ import {EQueryKeys} from "../../../shared/enum/query-keys";
 
 export const useGetExpectedPointsCase = (pageNumber: number, fromTour?: number) => {
     const execute = async () => {
-        return getExpectedPointsSlice({seasonId: SEASON_ID, fromTour: fromTour, toTour : LAST_TOUR, orderByTour : 23, pageNumber : pageNumber, pageSize : 20});
+        return getExpectedPointsSlice({seasonId: SEASON_ID, fromTour: fromTour, toTour : LAST_TOUR, orderByTour : fromTour, pageNumber : pageNumber, pageSize : 15});
     };
 
     return useQuery({

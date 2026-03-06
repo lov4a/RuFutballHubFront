@@ -1,8 +1,15 @@
 .wrapper {
   background: #f5f5f5;
   border-radius: 12px;
-  padding: 16px;
+  padding: 2px;
+  padding-bottom: 10px;
+  padding-top: 10px;
   border: 1px solid lightgrey;
+}
+
+.wrapper h3{
+  margin-top: 0;
+  text-align: center;
 }
 
 .fullWidth {
@@ -15,49 +22,52 @@
   width: 100%;
 }
 
-.table {
+.tableWrapper {
+  display: flex;
+}
+
+/* Левая колонка */
+.leftColumn {
+  flex: 0 0 70px;
+}
+
+/* Правая часть */
+.rightScroll {
+  overflow-x: auto;
+  flex: 1;
+}
+
+/* Таблицы */
+.leftColumn table,
+.rightScroll table {
   border-collapse: separate;
   border-spacing: 6px;
-  table-layout: fixed;  
-  min-width: max-content;
-}
-
-.teamHeader {
-  position: sticky;
-  left: 0;
-  background: #f5f5f5;
-  z-index: 2;
-  min-width: 70px;
-}
-
-
-
-.teamHeader,
-.teamCell {
-  width: 70px;              /* фикс */
-  min-width: 70px;
-  max-width: 70px;          /* ВАЖНО */
-}
-
-.teamHeader {
-  position: sticky;
-  left: 0;
-  background: #f5f5f5;
-  z-index: 3;
-}
-
-.teamCell {
-  position: sticky;
-  left: 0;
-  background: #f5f5f5;
-  z-index: 2;
 }
 
 .teamHeader,
 .teamCell {
-  box-shadow: 4px 0 4px -4px rgba(0,0,0,0.15);
-  font-size: 12px;
+  width: 70px;
+  min-width: 70px;
   text-align: center;
+}
+
+.leftColumn tr,
+.rightScroll tr {
+  height: 26px;
+}
+
+.leftColumn thead tr,
+.rightScroll thead tr {
+  height: 26px;
+}
+
+.fixture {
+  min-width: 60px;
+  text-align: center;
+  padding: 6px 4px;
+  border-radius: 6px;
+  font-size: 10px;
+  white-space: nowrap;
 }
 
 .fixture {
@@ -68,6 +78,8 @@
   font-size: 10px;
   white-space: nowrap;
 }
+
+
 
 /* Difficulty colors */
 

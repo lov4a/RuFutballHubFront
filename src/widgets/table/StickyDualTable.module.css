@@ -1,0 +1,117 @@
+.wrapper {
+    background: #f5f5f5;
+    border-radius: 12px;
+    padding: 2px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border: 1px solid lightgrey;
+}
+
+.wrapper h3{
+    margin-top: 0;
+    text-align: center;
+}
+
+.fullWidth {
+    width: 100%;
+    max-width: 100%;
+}
+
+.scrollContainer {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.tableWrapper {
+    display: flex;
+}
+
+.tableBody {
+    height: 520px;
+    overflow-y: auto;
+}
+
+.leftColumn {
+    flex: 0 0 70px;
+}
+
+.rightScroll {
+    overflow-x: auto;
+    flex: 1;
+
+
+}
+
+.leftColumn table,
+.rightScroll table {
+    border-collapse: separate;
+    border-spacing: 6px;
+}
+
+.teamHeader,
+.teamCell {
+    width: 60px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.teamHeader:nth-child(2),
+.teamCell:nth-child(2) {
+    width: 220px;
+    min-width: 220px;
+}
+
+.teamHeader:nth-child(1),
+.teamCell:nth-child(1) {
+    width: 60px;
+    min-width: 60px;
+}
+
+@media (max-width: 900px) {
+    .teamHeader:nth-child(1),
+    .teamCell:nth-child(1) {
+        width: 180px;
+        min-width: 180px;
+    }
+}
+
+.leftColumn tr,
+.rightScroll tr {
+    height: 26px;
+}
+
+.leftColumn thead tr,
+.rightScroll thead tr {
+    height: 26px;
+}
+
+.fixture {
+    min-width: 48px;
+    text-align: center;
+    padding: 6px 4px;
+    border-radius: 6px;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.difficulty1 { background: #427e42; }
+.difficulty2 { background: #6ca46c; }
+.difficulty3 { background: #acd7ac; }
+.difficulty4 { background: #c2e1c2; }
+.difficulty5 { background: #ddd; }
+.difficulty6 { background: #eac5c5; }
+.difficulty7 { background: #c29191; }
+.difficulty8 { background: #d07878; }
+.difficulty9 { background: #ec6161; }
+.difficulty10 { background: #ff4d4d; color: white; }
+
+.controls {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+button{
+    cursor: pointer;
+}

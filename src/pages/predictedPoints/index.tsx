@@ -3,12 +3,27 @@ import {LAST_TOUR, TWO} from "../../shared/const";
 import {useState} from "react";
 import styles from './index.module.css'
 import {useGetCurrentTourNumberCase} from "../../entities/helper/request";
+import {StickyDualTable} from "../../widgets/table";
+import {useIsMobile} from "../../shared/utils/sizeWindows";
 
 const PredictedPointsPage = () => {
 
     const [currentPage, setCurrentPage] = useState<number>(1);
     const { data: dataCurrentTourNumber } = useGetCurrentTourNumberCase()
     const { data: dataExpectedPoints } = useGetExpectedPointsCase(currentPage, dataCurrentTourNumber)
+
+    const isMobile = useIsMobile();
+
+    const leftHeaders = isMobile ? ["Игрок"] : ["№", "Игрок"];
+
+    const leftRows = dataExpectedPoints?.items?.map((item, index) =>
+        isMobile
+            ? [item.fullName]
+            : [
+                index + ((dataExpectedPoints?.pageNumber - 1) * 15) + 1,
+                item.fullName
+            ]
+    );
 
     const titleTour = [];
     for (let i = dataCurrentTourNumber; i <= LAST_TOUR; i++) {
@@ -22,44 +37,140 @@ const PredictedPointsPage = () => {
         (currentPage === 1) ? setCurrentPage(1) : setCurrentPage(currentPage - 1)
     }
 
+    const difficultyClass = (points: number) => {
+        const level = Math.min(10, Math.max(1, Math.ceil(points)));
+        return styles[`difficulty${level}`];
+    };
+
+    const handleGetCellClass=(row, col, cell) => {
+        return difficultyClass(cell.data.expectedPoints)
+    }
+
     return (
         <>
             <h1>Ожидаемые очки</h1>
 
-            <div className={styles.tableContainer }>
+        {/*    <StickyDualTable*/}
+        {/*        leftHeaders={leftHeaders}*/}
+
+        {/*        leftRows={leftRows}*/}
+
+        {/*        rightHeaders={Array.from(*/}
+        {/*            { length: LAST_TOUR - dataCurrentTourNumber + 1 },*/}
+        {/*            (_, i) => `${dataCurrentTourNumber + i}`*/}
+        {/*        )}*/}
+
+        {/*        rightRows={dataExpectedPoints?.items?.map(item =>*/}
+        {/*                item.tours.map(tour => ({*/}
+        {/*                    component: (*/}
+        {/*                        <span title={tour.isHome ? "Д" : "Г"}>*/}
+        {/*  {tour.expectedPoints.toFixed(TWO)}*/}
+        {/*</span>*/}
+        {/*                    ),*/}
+        {/*                    data: tour*/}
+        {/*                }))*/}
+        {/*        )}*/}
+
+                {/*getCellClass={(row, col, cell) => {*/}
+                {/*   return difficultyClass(cell.data.expectedPoints)*/}
+                {/*}}*/}
+
+
+        {/*        currentColumnIndex={0}*/}
+        {/*        fullWidth*/}
+        {/*        onPrev={handlePrevPage}*/}
+        {/*        onNext={handleNextPage}*/}
+        {/*    />*/}
+            <div>
                 <div className={styles.tableWrapper}>
-                    <table className={styles.stickyTable}>
-                        <thead>
-                        <tr>
-                            <th className={`${styles.stickyCol} ${styles.colId}`}>№</th>
-                            <th className={`${styles.stickyCol} ${styles.colName}`}>Игрок</th>
-                            {titleTour}
-                        </tr>
-                        </thead>
 
-                        <tbody>
-                        {dataExpectedPoints?.items?.map((item, index) => (
-                            <tr key={item.fullName}>
-                                <td className={`${styles.stickyCol} ${styles.colId}`}>
-                                    {index + ((dataExpectedPoints?.pageNumber - 1) * dataExpectedPoints?.pageSize) + 1}
-                                </td>
-                                <td className={`${styles.stickyCol} ${styles.colName}`}>{item.fullName}</td>
-
-                                {item.tours.map((tour, tIdx) => (
-                                    <td className={`${styles.stickyCol} ${styles.colTour}`} key={tIdx} title={tour.isHome ? "Д" : "Г"}>
-                                        {(tour.expectedPoints).toFixed(TWO)}
-                                    </td>
+                    {/* Левая фиксированная колонка */}
+                    <div className={styles.leftColumn}>
+                        <table>
+                            <thead>
+                            <tr>
+                                {leftHeaders.map((h, i) => (
+                                    <th key={i} className={styles.teamHeader}>
+                                        {h}
+                                    </th>
                                 ))}
                             </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            {leftRows?.map((row, rowIdx) => (
+                                <tr key={rowIdx}>
+                                    {row.map((cell, colIdx) => (
+                                        <td key={colIdx} className={styles.teamCell}>
+                                            {cell}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    </div>
 
+                    {/* Правая часть */}
+                    <div className={styles.rightScroll}>
+                        <table>
+                            <thead>
+                            <tr>
+                                {Array.from({ length: LAST_TOUR - dataCurrentTourNumber + 1 },
+                                (_, i) => `${dataCurrentTourNumber + i}`).map((h, i) => (
+                                    <th
+                                        key={i}
+                                        className={
+                                            i === 0 ? styles.currentTour : ""
+                                        }
+                                    >
+                                        {h}
+                                    </th>
+                                ))}
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {dataExpectedPoints?.items?.map(item =>
+                                    item.tours.map(tour => ({
+                                        component: (
+                                            <span title={tour.isHome ? "Д" : "Г"}>
+          {tour.expectedPoints.toFixed(TWO)}
+        </span>
+                                        ),
+                                        data: tour
+                                    }))
+                            )?.map((row, rowIdx) => (
+                                <tr key={rowIdx}>
+                                    {row?.map((cell, colIdx) => {
+                                        const userClass = handleGetCellClass?.(rowIdx, colIdx, cell) || "";
+
+                                        return (
+                                            <td
+                                                key={colIdx}
+                                                className={[
+                                                    styles.fixture,
+                                                    userClass,
+                                                    colIdx === 0 ? styles.currentTour : ""
+                                                ].join(" ")}
+                                            >
+                                                {cell?.component}
+                                            </td>
+                                        );
+                                    })}
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div className={styles.pagination}>
-                    <button onClick={handlePrevPage}>&lt;</button>
-                    <button onClick={handleNextPage}>&gt;</button>
-                </div>
+
+                {/* Кнопки */}
+                {
+                    <div className={styles.controls}>
+                        <button onClick={handlePrevPage}>&lt;</button>
+                        <button onClick={handleNextPage}>&gt;</button>
+                    </div>
+                }
             </div>
 
 

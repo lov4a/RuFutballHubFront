@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { api } from '../../../shared/api/axios'
 import { publishNews, rejectNews } from '../../../features/news/api/moderation'
-import styles from './news.module.css'
+import styles from './newsDetails.module.css'
+import { useAuth } from '../../../app/providers/AuthProvider'
+import { UserRole } from '../../../shared/auth/roles'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
@@ -63,58 +65,56 @@ export function NewsDetailsPage() {
   if (loading) return <div className={styles.loader}>Загрузка...</div>
   if (!news) return null
 
-  const isAdmin = true // заменить на реальную проверку ролей
+  const { roles } = useAuth()
 
-  const statusLabel =
-    news.status === 1
-      ? 'На проверке'
-      : news.status === 2
-      ? 'Опубликована'
-      : 'Отклонена'
+  const isAdmin = roles.includes(UserRole.Admin)
+
 
   return (
     <div className={styles.page}>
       {/* HERO */}
       {news.mainImage && (
-        <div className={styles.hero}>
-          <picture>
-            {news.mobileImage && (
-              <source
-                media="(max-width: 768px)"
-                srcSet={
-                  SERVER_URL +
-                  (news.mobileImage.mediumUrl ??
-                    news.mobileImage.originalUrl)
-                }
-              />
-            )}
+        <div className={styles.heroBlock}>
+          <div className={styles.hero}>
+            <picture>
+              {news.mobileImage && (
+                <source
+                  media="(max-width: 768px)"
+                  srcSet={
+                    SERVER_URL +
+                    (news.mobileImage.mediumUrl ??
+                      news.mobileImage.originalUrl)
+                  }
+                />
+              )}
 
-            <img
-              src={
-                SERVER_URL +
-                (news.mainImage.mediumUrl ??
-                  news.mainImage.originalUrl)
-              }
-              alt={news.title}
-            />
-          </picture>
+              <img
+                src={
+                  SERVER_URL +
+                  (news.mainImage.mediumUrl ??
+                    news.mainImage.originalUrl)
+                }
+                alt={news.title}
+              />
+            </picture>
+
+            <div className={styles.heroOverlay}>
+              <h1 className={styles.title}>{news.title}</h1>
+            </div>
+          </div>
+
+          {/* 👇 Мета-информация под фото */}
+          <div className={styles.heroMeta}>
+            <span>
+              {news.publishedAt &&
+                new Date(news.publishedAt).toLocaleDateString()}
+            </span>
+            <span>•</span>
+            <span>user</span>
+          </div>
         </div>
       )}
-
       <div className={styles.container}>
-        <h1 className={styles.title}>{news.title}</h1>
-
-        <div className={styles.meta}>
-          <span>{statusLabel}</span>
-
-          {news.publishedAt && (
-            <span>
-              {new Date(news.publishedAt).toLocaleDateString()}
-            </span>
-          )}
-        </div>
-
-        <p className={styles.summary}>{news.summary}</p>
 
         <div
           className={styles.content}
