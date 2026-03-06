@@ -3,21 +3,34 @@ import { TeamLineup } from './TeamLineup'
 import styles from './predictedLineups.module.css'
 
 type Props = {
-  teams: PredictedLineupDto[]
+  homeLineup?: PredictedLineupDto
+  awayLineup?: PredictedLineupDto
+  homeTeamName: string
+  awayTeamName: string
+  matchDate: string
 }
 
-export function LineupCard({ teams }: Props) {
-  if (teams.length !== 2) return null
 
+export function LineupCard({
+  homeLineup,
+  awayLineup,
+  homeTeamName,
+  awayTeamName,
+  matchDate
+}: Props) {
   return (
     <div className={styles.card}>
+      <div className={styles.date}>
+        {matchDate}
+      </div>
       <div className={styles.header}>
-        {teams[0].teamName} vs {teams[1].teamName}
+        <div style={{textAlign:'center'}}>{homeTeamName}</div>
+        <div style={{textAlign:'center'}}>{awayTeamName}</div>
       </div>
 
       <div className={styles.content}>
-        <TeamLineup lineup={teams[0]} />
-        <TeamLineup lineup={teams[1]} />
+        <TeamLineup lineup={homeLineup} />
+        <TeamLineup lineup={awayLineup} />
       </div>
     </div>
   )

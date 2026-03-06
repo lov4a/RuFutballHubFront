@@ -6,12 +6,14 @@ import {
   manualMatch,
 } from '../api/manualMatchingApi'
 
+const SEASON_ID = import.meta.env.VITE_SEASON_ID as string
+
 export function ManualUnderstatMatching() {
   return (
     <ManualPlayerMatchingBase<UnderstatSeasonPlayerDto>
       title="Ручное сопоставление Understat"
       loadPlayerSeasons={() =>
-        getPlayerSeasonsWithoutUnderstat('598c15d1-e730-4365-8617-9bd9c24e7553')
+        getPlayerSeasonsWithoutUnderstat(SEASON_ID)
       }
       loadTargets={getUnderstatPlayersNotProcessed}
       getTargetId={(u) => u.understatPlayerSeasonId}

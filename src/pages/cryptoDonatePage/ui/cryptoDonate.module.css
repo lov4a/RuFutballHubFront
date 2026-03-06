@@ -1,0 +1,63 @@
+.page{
+  max-width:600px;
+  margin:40px auto;
+  text-align:center;
+}
+
+.description{
+  margin-bottom:20px;
+  color:#aaa;
+}
+
+.networkSwitch{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.networkSwitch button{
+  padding:8px 14px;
+  border-radius:6px;
+  border:none;
+  cursor:pointer;
+  background:#2a2a2a;
+  color:white;
+}
+
+.active{
+  background:#1e8c5a;
+}
+
+.qr{
+  margin:20px 0;
+}
+
+.addressBox{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.addressBox code{
+  background:#111;
+  padding:10px;
+  border-radius:6px;
+  color: white;
+}
+
+.addressBox button{
+  padding:8px 12px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  background:#d4af37;
+}
+
+.warning{
+  margin-top:20px;
+  font-size:14px;
+  color:#888;
+}

@@ -7,19 +7,18 @@ export function TopBar() {
   return (
     <div className={styles.topBar}>
       <div className={styles.topLeft}>
-        <a href="#">X</a>
-        <a href="#">IG</a>
+        <a href="https://t.me/rufantasyhub">TG</a>
       </div>
 
  <div className={styles.topRight}>
         {!isAuthenticated ? (
           <>
             <Link to="/login" className={styles.signIn}>
-              Sign in
+              Вход
             </Link>
-            <Link to="/register" className={styles.join}>
-              Join
-            </Link>
+            {/* <Link to="/register" className={styles.join}>
+              Регистрация
+            </Link> */}
           </>
         ) : (
           <>

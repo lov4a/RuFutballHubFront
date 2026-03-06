@@ -1,5 +1,5 @@
 import {useGetExpectedPointsCase} from "../../entities/predictedPoints/request";
-import {LAST_TOUR, TWO} from "../../shared/const";
+import {LAST_TOUR, SEASON_ID, TWO} from "../../shared/const";
 import {useState} from "react";
 import styles from './index.module.css'
 import {useGetCurrentTourNumberCase} from "../../entities/helper/request";
@@ -9,6 +9,7 @@ import {useIsMobile} from "../../shared/utils/sizeWindows";
 const PredictedPointsPage = () => {
 
     const [currentPage, setCurrentPage] = useState<number>(1);
+    console.log(SEASON_ID)
     const { data: dataCurrentTourNumber } = useGetCurrentTourNumberCase()
     const { data: dataExpectedPoints } = useGetExpectedPointsCase(currentPage, dataCurrentTourNumber)
 

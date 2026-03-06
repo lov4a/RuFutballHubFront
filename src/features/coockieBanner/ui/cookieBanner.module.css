@@ -1,0 +1,38 @@
+.banner{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+
+  max-width:900px;
+  width:90%;
+
+  background:#121212;
+  border:1px solid rgba(255,255,255,0.08);
+  opacity: 0.85;
+
+  padding:16px;
+  border-radius:10px;
+
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+
+  z-index:9999;
+  color: white;
+}
+
+.actions{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.actions button{
+  padding:8px 14px;
+  border:none;
+  border-radius:6px;
+  background:#1e8c5a;
+  color:white;
+  cursor:pointer;
+}

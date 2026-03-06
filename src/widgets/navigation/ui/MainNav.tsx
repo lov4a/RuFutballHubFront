@@ -13,7 +13,9 @@ export function MainNav({ onMenuClick }: MainNavProps) {
         ☰
       </button>
 
-      <div className={styles.logo}>RFH</div>
+      <Link to="/" className={styles.logo}>
+        RFH
+      </Link>
 
       <nav className={styles.nav}>
         {NAV_ITEMS.map((item) => (
