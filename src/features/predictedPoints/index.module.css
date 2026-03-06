@@ -1,43 +1,15 @@
-/*.tableContainer {*/
-/*    width: max-content;*/
-/*}*/
+.container {
+    width: 100%;
+}
 
+.scrollContainer {
+    width: 100%;
+    overflow-x: auto;
+}
 
-/*.tableWrapper {*/
-/*    overflow-x: auto;*/
-/*    border: 1px solid #ddd;*/
-/*    border-radius: 6px;*/
-/*    max-height: calc(100vh - 250px);*/
-/*}*/
-
-/*.stickyTable {*/
-/*    border-collapse: separate;*/
-/*    border-spacing: 0;*/
-/*    width: max-content;*/
-/*    font-size: 14px;*/
-/*}*/
-
-/*.stickyTable th,*/
-/*.stickyTable td {*/
-/*    padding: 10px 16px;*/
-/*    white-space: nowrap;*/
-/*    border: 1px solid #ccc;*/
-/*    background: #fff;*/
-/*}*/
-
-/*.stickyTable tbody tr:nth-child(even) td {*/
-/*    background: #fafafa;*/
-/*}*/
-
-/*.stickyTable tbody tr:hover td {*/
-/*    background: #f1f1f1;*/
-/*}*/
-
-/*.stickyTable thead th {*/
-/*    background: #f4f6f8;*/
-/*    font-weight: 600;*/
-/*    border-bottom: 2px solid #bbb;*/
-/*}*/
+.tableBlock {
+    width: max-content;
+}
 
 .stickyCol {
     position: sticky;
@@ -53,36 +25,9 @@
     background: #f4f6f8;
 }
 
-/*.colId {*/
-/*   width: 60px;*/
-/*}*/
-
-/*.colName {*/
-/*    width: 220px;*/
-/*}*/
-
 .colTour {
     width: 70px;
 }
-
-/*.pagination {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    gap: 12px;*/
-/*    padding: 15px 0;*/
-/*}*/
-
-
-/*.difficulty10 { background: #427e42; }*/
-/*.difficulty9 { background: #6ca46c; }*/
-/*.difficulty8 { background: #acd7ac; }*/
-/*.difficulty7 { background: #c2e1c2; }*/
-/*.difficulty6 { background: #ddd; }*/
-/*.difficulty5 { background: #eac5c5; }*/
-/*.difficulty4 { background: #c29191; }*/
-/*.difficulty3 { background: #d07878; }*/
-/*.difficulty2 { background: #ec6161; }*/
-/*.difficulty1 { background: #ff4d4d; color: white; }*/
 
 .wrapper {
     background: #f5f5f5;
@@ -110,6 +55,7 @@
 
 .tableWrapper {
     display: flex;
+    min-height: 520px;
 }
 
 .tableBody {
@@ -124,8 +70,6 @@
 .rightScroll {
     overflow-x: auto;
     flex: 1;
-
-
 }
 
 .leftColumn table,
@@ -192,12 +136,37 @@
 .difficulty1 { background: #ff4d4d; color: white; }
 
 .controls {
-    margin-top: 12px;
     display: flex;
     justify-content: center;
     gap: 12px;
+    margin-top: 12px;
 }
 
 button{
     cursor: pointer;
+}
+
+.skeleton {
+    width: 100%;
+    height: 14px;
+    border-radius: 4px;
+
+    background: linear-gradient(
+            90deg,
+            #eee 25%,
+            #f5f5f5 37%,
+            #eee 63%
+    );
+
+    background-size: 400% 100%;
+    animation: skeleton-loading 1.4s ease infinite;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
 }
